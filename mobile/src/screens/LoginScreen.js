@@ -10,11 +10,13 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from "react-native";
+import { useRouter } from "expo-router";
 import * as SecureStore from "expo-secure-store";
 import api from "../api/api";
 import useAuthStore from "../store/authStore";
 
-const LoginScreen = ({ navigation }) => {
+const LoginScreen = () => {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -36,7 +38,8 @@ const LoginScreen = ({ navigation }) => {
       // On met à jour le store Zustand avec les infos de l'utilisateur et le token
       setAuth(user, token);
 
-      // La navigation vers UsersScreen se fait automatiquement grâce à la logique dans App.js
+      // Redirection vers l'écran protégé des utilisateurs
+      router.replace("/users");
     } catch (error) {
       const message =
         error.response?.data?.message || "Une erreur s'est produite.";
@@ -72,7 +75,7 @@ const LoginScreen = ({ navigation }) => {
         <Text style={styles.buttonText}>Login</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => navigation.navigate("Register")}>
+      <TouchableOpacity onPress={() => router.push("/register")}>
         <Text style={styles.link}>Pas de compte ? S'inscrire</Text>
       </TouchableOpacity>
     </KeyboardAvoidingView>

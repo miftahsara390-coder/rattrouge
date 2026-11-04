@@ -8,11 +8,14 @@ import {
   StyleSheet,
   Alert,
 } from "react-native";
+import { useRouter } from "expo-router";
 import * as SecureStore from "expo-secure-store";
 import api from "../api/api";
 import useAuthStore from "../store/authStore";
 
 const UsersScreen = () => {
+  const router = useRouter();
+
   // useState stocke la liste des utilisateurs récupérés de l'API
   const [users, setUsers] = useState([]);
 
@@ -49,6 +52,7 @@ const UsersScreen = () => {
 
     // On vide le store Zustand → l'app retourne automatiquement à Login
     clearAuth();
+    router.replace("/login");
   };
 
   // Fonction qui affiche un seul élément dans la FlatList

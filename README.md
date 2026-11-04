@@ -28,6 +28,16 @@ rattrouge/
     package.json
 
   mobile/
+    app/
+      _layout.js              → Layout racine + restauration de session
+      index.js                → Point d'entrée & redirection conditionnelle
+      (auth)/
+        _layout.js            → Layout du groupe auth (redirige si connecté)
+        login.js              → Route /login
+        register.js           → Route /register
+      (app)/
+        _layout.js            → Layout protégé (redirige si non connecté)
+        users.js              → Route /users
     src/
       api/api.js              → Instance Axios configurée
       store/authStore.js      → Store Zustand (état global auth)
@@ -35,7 +45,7 @@ rattrouge/
         RegisterScreen.js     → Écran d'inscription
         LoginScreen.js        → Écran de connexion
         UsersScreen.js        → Écran liste des utilisateurs
-    App.js                    → Navigation + restauration de session
+    app.json                  → Configuration Expo & Expo Router
     package.json
 
   README.md
@@ -211,4 +221,4 @@ Réponse attendue (401) :
 | **Axios** | Envoyer des requêtes HTTP depuis le mobile vers l'API |
 | **Zustand** | Partager l'état de l'utilisateur entre les écrans |
 | **SecureStore** | Stocker le token JWT de façon sécurisée sur le téléphone |
-| **React Navigation** | Naviguer entre les écrans Register, Login, Users |
+| **Expo Router** | Routage basé sur les fichiers et navigation (remplace React Navigation) |

@@ -10,9 +10,12 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from "react-native";
+import { useRouter } from "expo-router";
 import api from "../api/api";
 
-const RegisterScreen = ({ navigation }) => {
+const RegisterScreen = () => {
+  const router = useRouter();
+
   // useState stocke les valeurs des champs du formulaire
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -26,7 +29,7 @@ const RegisterScreen = ({ navigation }) => {
 
       // Si ça marche, on affiche un message et on redirige vers Login
       Alert.alert("Succès", response.data.message);
-      navigation.navigate("Login");
+      router.replace("/login");
     } catch (error) {
       // En cas d'erreur, on affiche le message retourné par le backend
       const message =
@@ -71,7 +74,7 @@ const RegisterScreen = ({ navigation }) => {
         <Text style={styles.buttonText}>Register</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+      <TouchableOpacity onPress={() => router.replace("/login")}>
         <Text style={styles.link}>Déjà un compte ? Se connecter</Text>
       </TouchableOpacity>
     </KeyboardAvoidingView>
